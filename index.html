@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Análise de Viscosidade de Óleo Parafínico — Iniciação Científica</title>
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<a class="skip-link" href="#visao-geral">Pular para o conteúdo</a>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand-group">
+      <span class="header-logo">
+        <img src="assets/logo-cefetrj.png" alt="Logo do CEFET/RJ" />
+      </span>
+      <span class="brand">Viscosidade · Óleo Parafínico</span>
+    </div>
+    <nav class="main-nav" id="main-nav">
+      <a href="#visao-geral">Visão geral</a>
+      <a href="#equipe">Equipe</a>
+      <a href="#curvas">Curvas</a>
+      <a href="#comparacoes">Comparações</a>
+      <a href="#dados">Dados</a>
+      <a href="#metodologia">Metodologia</a>
+    </nav>
+    <div class="topbar-actions">
+      <button id="theme-toggle" class="icon-btn" title="Alternar tema claro/escuro" aria-label="Alternar tema">
+        <span id="theme-icon">🌙</span>
+      </button>
+      <button id="nav-toggle" class="icon-btn nav-toggle" aria-label="Abrir menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- 1. VISÃO GERAL -->
+  <section id="visao-geral" class="section hero">
+    <div class="container">
+      <p class="eyebrow">Iniciação Científica — Engenharia de Controle e Automação</p>
+      <h1>Análise de Viscosidade de Óleo Parafínico</h1>
+      <p class="subtitle">Comparação do comportamento reológico de amostras hidratadas e desidratadas, com e sem inibidores químicos.</p>
+
+      <div class="team-inline" id="equipe">
+        <div class="team-card">
+          <span class="team-role">Orientadora</span>
+          <span class="team-name">Prof.ª Denise Gentili</span>
+        </div>
+        <div class="team-card">
+          <span class="team-role">Pesquisador</span>
+          <span class="team-name">Pedro Barbosa</span>
+        </div>
+      </div>
+
+      <div class="kpi-grid" id="kpi-grid" aria-label="Indicadores gerais calculados a partir da planilha"></div>
+    </div>
+  </section>
+
+  <!-- 3. CURVAS DE VISCOSIDADE -->
+  <section id="curvas" class="section">
+    <div class="container">
+      <h2>Viscosidade em função da temperatura</h2>
+      <p class="section-hint">Rotor 4, 6 RPM. Eixo X: Temperatura (°C). Eixo Y: Viscosidade (mP).</p>
+
+      <div class="chart-toolbar">
+        <div class="toolbar-group">
+          <span class="toolbar-label">Condição:</span>
+          <div class="segmented" id="condicao-filter">
+            <button class="seg-btn active" data-cond="todas">Todas</button>
+            <button class="seg-btn" data-cond="Desidratado">Desidratado</button>
+            <button class="seg-btn" data-cond="Hidratado">Hidratado</button>
+          </div>
+        </div>
+        <div class="toolbar-group">
+          <span class="toolbar-label">Escala:</span>
+          <div class="segmented" id="scale-toggle">
+            <button class="seg-btn active" data-scale="linear">Linear</button>
+            <button class="seg-btn" data-scale="log">Logarítmica</button>
+          </div>
+        </div>
+        <div class="toolbar-group">
+          <button class="btn-ghost" id="select-all">Selecionar todas</button>
+          <button class="btn-ghost" id="select-none">Ocultar todas</button>
+        </div>
+      </div>
+
+      <div class="chart-layout">
+        <div class="chart-canvas-wrap">
+          <canvas id="main-chart" aria-label="Gráfico de viscosidade por temperatura"></canvas>
+          <div id="chart-tooltip" class="chart-tooltip" role="status"></div>
+        </div>
+        <aside class="legend" id="chart-legend" aria-label="Legenda e seleção de amostras"></aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. COMPARAÇÕES -->
+  <section id="comparacoes" class="section alt">
+    <div class="container">
+      <h2>Comparação entre condições experimentais</h2>
+      <p class="section-hint">Comparações calculadas apenas em temperaturas comuns entre a amostra de referência e a amostra com aditivo.</p>
+      <div id="comparacoes-content"></div>
+    </div>
+  </section>
+
+  <!-- 5. DADOS EXPERIMENTAIS -->
+  <section id="dados" class="section">
+    <div class="container">
+      <h2>Dados experimentais</h2>
+      <p class="section-hint">Tabela completa com os dados originais da planilha. Nenhum valor foi alterado.</p>
+
+      <div class="table-toolbar">
+        <input type="search" id="table-search" placeholder="Buscar amostra, condição ou aditivo…" aria-label="Buscar na tabela" />
+        <select id="filter-amostra" aria-label="Filtrar por amostra">
+          <option value="">Todas as amostras</option>
+        </select>
+        <select id="filter-condicao" aria-label="Filtrar por condição">
+          <option value="">Todas as condições</option>
+          <option value="Desidratado">Desidratado</option>
+          <option value="Hidratado">Hidratado</option>
+        </select>
+        <button class="btn-primary" id="export-csv">Exportar CSV</button>
+      </div>
+
+      <div class="table-wrap">
+        <table id="data-table">
+          <thead>
+            <tr>
+              <th data-key="amostra">Amostra</th>
+              <th data-key="condicao">Condição</th>
+              <th data-key="aditivo">Aditivo / Inibidor</th>
+              <th data-key="temperatura">Temperatura (°C)</th>
+              <th data-key="viscosidade">Viscosidade (mP)</th>
+              <th data-key="rotor">Rotor</th>
+              <th data-key="rpm">RPM</th>
+            </tr>
+          </thead>
+          <tbody id="data-table-body"></tbody>
+        </table>
+      </div>
+      <p class="table-meta" id="table-count"></p>
+    </div>
+  </section>
+
+  <!-- 6. METODOLOGIA -->
+  <section id="metodologia" class="section alt">
+    <div class="container">
+      <h2>Condições experimentais</h2>
+      <div class="method-grid" id="method-grid"></div>
+    </div>
+  </section>
+
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p>Dashboard gerado a partir dos dados experimentais da planilha "Resultados Pedro I.C atualizado". Iniciação Científica — Engenharia de Controle e Automação.</p>
+  </div>
+</footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/chart.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
