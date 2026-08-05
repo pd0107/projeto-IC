@@ -27,22 +27,6 @@
   --focus-ring: 0 0 0 3px rgba(30, 64, 175, 0.32);
 }
 
-[data-theme="dark"] {
-  --bg: #121110;
-  --bg-alt: #191815;
-  --surface: #1a1917;
-  --border: #2c2a25;
-  --border-strong: #3c392f;
-  --text: #f3f1ea;
-  --text-muted: #9c9686;
-  --accent: #7ba4f5;
-  --accent-2: #5ac0f0;
-  --positive: #4fbd7c;
-  --negative: #ec6a5e;
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.24);
-  --focus-ring: 0 0 0 3px rgba(123, 164, 245, 0.38);
-}
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
@@ -96,78 +80,86 @@ body {
   top: 0;
   z-index: 50;
   background: var(--surface);
-  background: color-mix(in srgb, var(--surface) 92%, transparent);
-  backdrop-filter: saturate(140%) blur(8px);
-  -webkit-backdrop-filter: saturate(140%) blur(8px);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: saturate(160%) blur(12px);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
   border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 24px rgba(22, 20, 15, 0.05);
 }
 .topbar-inner {
   max-width: 1220px;
   margin: 0 auto;
   padding: 0 32px;
-  height: 64px;
+  height: 68px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 24px;
 }
 .brand-group {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   min-width: 0;
 }
 .header-logo {
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  padding-right: 14px;
-  border-right: 1px solid var(--border);
 }
 .header-logo img {
-  height: 48px;
+  height: 44px;
   width: auto;
-  max-width: 140px;
+  max-width: 132px;
   object-fit: contain;
   display: block;
 }
-/* A imagem oficial tem fundo branco opaco; em tema escuro isso destoa do
-   header — envolvemos em um chip claro discreto para parecer intencional,
-   sem alterar o arquivo original. */
-[data-theme="dark"] .header-logo {
-  background: #ffffff;
-  border-radius: 8px;
-  padding: 6px 10px;
-  margin-right: 4px;
-}
-[data-theme="dark"] .header-logo img { height: 36px; }
 .brand {
-  font-weight: 700;
-  font-size: 0.92rem;
+  position: relative;
+  padding-left: 16px;
+  font-weight: 600;
+  font-size: 0.95rem;
   letter-spacing: -0.1px;
   color: var(--text);
   white-space: nowrap;
 }
+.brand::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 22px;
+  background: rgba(22, 20, 15, 0.12);
+}
 .main-nav {
   display: flex;
-  gap: 28px;
+  align-items: center;
+  gap: 30px;
   flex: 1;
-  justify-content: center;
+  justify-content: flex-end;
 }
 .main-nav a {
+  position: relative;
   color: var(--text-muted);
   text-decoration: none;
   font-size: 0.83rem;
   font-weight: 500;
   letter-spacing: 0.1px;
-  padding: 8px 2px;
+  padding: 8px 1px;
   white-space: nowrap;
   border-bottom: 1px solid transparent;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
-.main-nav a:hover { color: var(--text); border-color: var(--text); }
+.main-nav a:hover { color: var(--text); }
+.main-nav a.active {
+  color: var(--text);
+  font-weight: 600;
+  border-color: var(--text);
+}
 
-.topbar-actions { display: flex; gap: 8px; align-items: center; }
+.topbar-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
 .icon-btn {
   background: transparent;
   border: 1px solid var(--border);
@@ -562,7 +554,7 @@ table#data-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
      recolhemos para o menu hambúrguer para não espremer os links. */
   .main-nav {
     position: absolute;
-    top: 64px;
+    top: 68px;
     left: 0;
     right: 0;
     background: var(--surface);
@@ -581,9 +573,14 @@ table#data-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
   .section { padding: 56px 0; }
   .hero { padding-top: 56px; }
   .header-logo img { height: 32px; max-width: 96px; }
-  .header-logo { padding-right: 10px; }
   .brand-group { gap: 10px; }
-  .brand { font-size: 0.8rem; overflow: hidden; text-overflow: ellipsis; }
+  .brand {
+    padding-left: 10px;
+    font-size: 0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .brand::before { height: 16px; }
   .table-toolbar { flex-direction: column; }
   .table-toolbar input, .table-toolbar select, .table-toolbar button { width: 100%; }
 }

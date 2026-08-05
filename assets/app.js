@@ -371,32 +371,36 @@ function renderMethodology() {
     .join("");
 }
 
-/* ============ Navegação / tema ============ */
+/* ============ Navegação ============ */
 function initChrome() {
   const navToggle = document.getElementById("nav-toggle");
   const nav = document.getElementById("main-nav");
   navToggle.addEventListener("click", () => nav.classList.toggle("open"));
   nav.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => nav.classList.remove("open")));
 
-  const themeToggle = document.getElementById("theme-toggle");
-  const themeIcon = document.getElementById("theme-icon");
-  const stored = localStorage.getItem("viscosidade-theme");
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const initial = stored || (prefersDark ? "dark" : "light");
-  applyTheme(initial);
+  initScrollSpy();
+}
 
-  themeToggle.addEventListener("click", () => {
-    const current = document.documentElement.getAttribute("data-theme") || "light";
-    const next = current === "dark" ? "light" : "dark";
-    applyTheme(next);
-    localStorage.setItem("viscosidade-theme", next);
-  });
+function initScrollSpy() {
+  const navLinks = Array.from(document.querySelectorAll(".main-nav a"));
+  const sections = navLinks
+    .map((a) => document.querySelector(a.getAttribute("href")))
+    .filter(Boolean);
+  if (!sections.length || !("IntersectionObserver" in window)) return;
 
-  function applyTheme(t) {
-    document.documentElement.setAttribute("data-theme", t);
-    themeIcon.textContent = t === "dark" ? "☀️" : "🌙";
-    if (chart) chart.render();
-  }
+  const setActive = (id) => {
+    navLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === `#${id}`));
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    },
+    { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+  );
+  sections.forEach((s) => observer.observe(s));
 }
 
 /* ============ Boot ============ */
