@@ -71,10 +71,20 @@ class LineChart {
   }
 
   _setupCanvasSize() {
-    const rect = this.canvas.parentElement.getBoundingClientRect();
+    // Importante: nunca limpar/ler o próprio canvas.style antes de medir.
+    // <canvas> é um elemento "substituído" — sem largura/altura CSS
+    // explícitas, ele usa como fallback o seu PRÓPRIO tamanho intrínseco
+    // (os atributos width/height, já escalados pelo devicePixelRatio da
+    // renderização anterior), criando um loop que infla o canvas a cada
+    // resize. Por isso medimos o contêiner pai (clientWidth/Height, que já
+    // exclui a borda) e descontamos o recuo de 8px definido no CSS
+    // (#main-chart { left/right/top/bottom: 8px }) para casar exatamente
+    // com a área visível do card.
+    const wrap = this.canvas.parentElement;
+    const inset = 8; // deve casar com o left/right/top/bottom do #main-chart no CSS
     const dpr = window.devicePixelRatio || 1;
-    const w = Math.max(rect.width, 280);
-    const h = Math.max(rect.height, 320);
+    const w = Math.max(wrap.clientWidth - inset * 2, 280);
+    const h = Math.max(wrap.clientHeight - inset * 2, 320);
     this.canvas.width = w * dpr;
     this.canvas.height = h * dpr;
     this.canvas.style.width = w + "px";
@@ -127,6 +137,57 @@ class LineChart {
     const ticks = [];
     for (let e = lo; e <= hi; e++) ticks.push(Math.pow(10, e));
     return ticks;
+  }
+
+  /*
+   * Interpolação cúbica monótona (Fritsch–Carlson), a mesma técnica usada
+   * pelo curveMonotoneX do D3 / modo "monotone" do Chart.js. Diferente de
+   * uma spline comum (Catmull-Rom), ela NUNCA ultrapassa o intervalo de
+   * valores entre dois pontos vizinhos — ou seja, a curva fica visualmente
+   * suave sem "inventar" picos ou vales que não existem nos dados medidos.
+   * Retorna, para cada segmento i -> i+1, os dois pontos de controle da
+   * bézier cúbica equivalente.
+   */
+  _monotoneControlPoints(pts) {
+    const n = pts.length;
+    const controls = [];
+    if (n < 2) return controls;
+    const dx = new Array(n - 1);
+    const d = new Array(n - 1);
+    for (let i = 0; i < n - 1; i++) {
+      dx[i] = pts[i + 1].x - pts[i].x;
+      d[i] = dx[i] === 0 ? 0 : (pts[i + 1].y - pts[i].y) / dx[i];
+    }
+    const m = new Array(n);
+    m[0] = d[0];
+    m[n - 1] = d[n - 2];
+    for (let i = 1; i < n - 1; i++) {
+      if (d[i - 1] === 0 || d[i] === 0 || d[i - 1] * d[i] < 0) m[i] = 0;
+      else m[i] = (d[i - 1] + d[i]) / 2;
+    }
+    for (let i = 0; i < n - 1; i++) {
+      if (d[i] === 0) {
+        m[i] = 0;
+        m[i + 1] = 0;
+        continue;
+      }
+      const a = m[i] / d[i];
+      const b = m[i + 1] / d[i];
+      const s = a * a + b * b;
+      if (s > 9) {
+        const tau = 3 / Math.sqrt(s);
+        m[i] = tau * a * d[i];
+        m[i + 1] = tau * b * d[i];
+      }
+    }
+    for (let i = 0; i < n - 1; i++) {
+      const cp1x = pts[i].x + dx[i] / 3;
+      const cp1y = pts[i].y + (m[i] * dx[i]) / 3;
+      const cp2x = pts[i + 1].x - dx[i] / 3;
+      const cp2y = pts[i + 1].y - (m[i + 1] * dx[i]) / 3;
+      controls.push({ cp1x, cp1y, cp2x, cp2y });
+    }
+    return controls;
   }
 
   render() {
@@ -208,30 +269,38 @@ class LineChart {
     this._lastDomain = domain;
     vis.forEach((s) => {
       const sorted = [...s.dados].sort((a, b) => a.temperatura - b.temperatura);
+      const pxPoints = sorted.map((p) => ({
+        x: this._sx(p.temperatura, domain),
+        y: this._sy(p.viscosidade, domain),
+      }));
+
       ctx.beginPath();
       ctx.strokeStyle = s.color;
       ctx.lineWidth = s.lineStyle === "solid" ? 2.75 : 2.1;
       ctx.setLineDash(dashFor(s.lineStyle));
       ctx.lineJoin = "round";
       ctx.lineCap = "round";
-      sorted.forEach((p, i) => {
-        const x = this._sx(p.temperatura, domain);
-        const y = this._sy(p.viscosidade, domain);
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      });
+      if (pxPoints.length === 1) {
+        ctx.moveTo(pxPoints[0].x, pxPoints[0].y);
+        ctx.lineTo(pxPoints[0].x, pxPoints[0].y);
+      } else {
+        const controls = this._monotoneControlPoints(pxPoints);
+        ctx.moveTo(pxPoints[0].x, pxPoints[0].y);
+        controls.forEach((c, i) => {
+          const next = pxPoints[i + 1];
+          ctx.bezierCurveTo(c.cp1x, c.cp1y, c.cp2x, c.cp2y, next.x, next.y);
+        });
+      }
       ctx.stroke();
       ctx.setLineDash([]);
 
-      sorted.forEach((p) => {
-        const x = this._sx(p.temperatura, domain);
-        const y = this._sy(p.viscosidade, domain);
+      pxPoints.forEach((pt) => {
         ctx.beginPath();
-        ctx.arc(x, y, 3.4, 0, Math.PI * 2);
-        ctx.fillStyle = s.color;
+        ctx.arc(pt.x, pt.y, 3.8, 0, Math.PI * 2);
+        ctx.fillStyle = "#ffffff";
         ctx.fill();
-        ctx.lineWidth = 1.4;
-        ctx.strokeStyle = "#fff";
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = s.color;
         ctx.stroke();
       });
     });

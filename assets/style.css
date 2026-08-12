@@ -583,4 +583,13 @@ table#data-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
   .brand::before { height: 16px; }
   .table-toolbar { flex-direction: column; }
   .table-toolbar input, .table-toolbar select, .table-toolbar button { width: 100%; }
+
+  /* Os controles em pílula (Condição/Escala/Selecionar) não cabem lado a
+     lado num card estreito — empilha e estica cada grupo para ocupar toda
+     a largura, em vez de deixar o pill vazar a borda do cartão. */
+  .chart-toolbar { flex-direction: column; align-items: stretch; gap: 16px; }
+  .toolbar-group { flex-direction: column; align-items: stretch; gap: 8px; }
+  .segmented { width: 100%; }
+  .seg-btn { flex: 1; }
+  .btn-ghost { width: 100%; text-align: center; }
 }
