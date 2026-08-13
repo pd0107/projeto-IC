@@ -4,157 +4,400 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Análise de Viscosidade de Óleo Parafínico — Iniciação Científica</title>
+<meta name="description" content="Estudo experimental sobre a influência da água e de diferentes inibidores na viscosidade e na deposição de parafina do Óleo A. Iniciação Científica — CEFET/RJ." />
 <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-<a class="skip-link" href="#visao-geral">Pular para o conteúdo</a>
+<a class="skip-link" href="#main">Pular para o conteúdo</a>
 
-<header class="topbar">
-  <div class="topbar-inner">
-    <div class="brand-group">
-      <span class="header-logo">
-        <img src="assets/logo-cefetrj.png" alt="Logo do CEFET/RJ" />
-      </span>
-      <span class="brand">Viscosidade · Óleo Parafínico</span>
-    </div>
-    <nav class="main-nav" id="main-nav">
-      <a href="#visao-geral">Visão geral</a>
-      <a href="#equipe">Equipe</a>
-      <a href="#curvas">Curvas</a>
-      <a href="#comparacoes">Comparações</a>
-      <a href="#dados">Dados</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="header-brand" href="#top">
+      <img src="assets/images/editorial/lab-symbol.png" alt="" width="30" height="30" />
+      <span>Viscosidade · Óleo Parafínico</span>
+    </a>
+    <nav class="header-nav" id="main-nav">
+      <a href="#pesquisa">Pesquisa</a>
       <a href="#metodologia">Metodologia</a>
+      <a href="#resultados">Resultados</a>
+      <a href="#equipe">Equipe</a>
+      <a href="#referencias">Referências</a>
     </nav>
-    <div class="topbar-actions">
-      <button id="nav-toggle" class="icon-btn nav-toggle" aria-label="Abrir menu">☰</button>
-    </div>
+    <button id="nav-toggle" class="nav-toggle" aria-label="Abrir menu" aria-controls="main-nav">☰</button>
   </div>
 </header>
 
-<main>
+<main id="main">
 
-  <!-- 1. VISÃO GERAL -->
-  <section id="visao-geral" class="section hero">
-    <div class="container">
-      <p class="eyebrow">Iniciação Científica — Engenharia de Controle e Automação</p>
-      <h1>Análise de Viscosidade de Óleo Parafínico</h1>
-      <p class="subtitle">Comparação do comportamento reológico de amostras hidratadas e desidratadas, com e sem inibidores químicos.</p>
-
-      <div class="team-inline" id="equipe">
-        <div class="team-card">
-          <span class="team-role">Orientadora</span>
-          <span class="team-name">Prof.ª Denise Gentili</span>
-        </div>
-        <div class="team-card">
-          <span class="team-role">Pesquisador</span>
-          <span class="team-name">Pedro Barbosa</span>
+  <!-- 02 — HERO -->
+  <section class="hero" id="top">
+    <div class="hero-media">
+      <img
+        src="assets/images/editorial/hero-petroleum-water.jpg"
+        alt="Interação visual entre petróleo e água"
+        width="1672" height="941"
+        fetchpriority="high" decoding="async"
+      />
+    </div>
+    <div class="hero-scrim"></div>
+    <div class="hero-inner">
+      <div class="container">
+        <div class="hero-copy" data-reveal>
+          <p class="label">Iniciação Científica · CEFET/RJ</p>
+          <h1 class="display-1">Entendendo o comportamento de petróleos parafínicos.</h1>
+          <p class="lede">Um estudo experimental sobre a influência da água e de diferentes inibidores na viscosidade e na deposição de parafina.</p>
+          <p class="hero-meta">Óleo A · Água ≈ 30% · Inibidores químicos</p>
+          <a class="hero-scroll" href="#pesquisa">Conheça a pesquisa ↓</a>
         </div>
       </div>
-
-      <div class="kpi-grid" id="kpi-grid" aria-label="Indicadores gerais calculados a partir da planilha"></div>
     </div>
   </section>
 
-  <!-- 3. CURVAS DE VISCOSIDADE -->
-  <section id="curvas" class="section">
+  <!-- 03 — CONTEXTUALIZAÇÃO -->
+  <section class="section section-bg-white" id="pesquisa">
     <div class="container">
-      <h2>Viscosidade em função da temperatura</h2>
-      <p class="section-hint">Rotor 4, 6 RPM. Eixo X: Temperatura (°C). Eixo Y: Viscosidade (mP).</p>
+      <div class="problem-block" data-reveal>
+        <p class="label">O problema</p>
+        <p class="body-text" style="font-size:1.1rem; color: var(--text);">Durante a produção e o transporte de petróleos parafínicos, a redução da temperatura pode favorecer a formação e deposição de cristais de parafina, alterando o comportamento do óleo e dificultando seu escoamento.</p>
+      </div>
+      <p class="big-question" data-reveal>Como a presença de água e diferentes inibidores pode alterar esse comportamento?</p>
+    </div>
+  </section>
 
-      <div class="chart-toolbar">
-        <div class="toolbar-group">
-          <span class="toolbar-label">Condição:</span>
-          <div class="segmented" id="condicao-filter">
-            <button class="seg-btn active" data-cond="todas">Todas</button>
-            <button class="seg-btn" data-cond="Desidratado">Desidratado</button>
-            <button class="seg-btn" data-cond="Hidratado">Hidratado</button>
+  <!-- 04 — FORMAÇÃO DE PARAFINA -->
+  <section class="section section-bg-blue">
+    <div class="container">
+      <div class="split">
+        <div class="split-media formation-media" data-reveal>
+          <img
+            src="assets/images/editorial/paraffin-formation.jpg"
+            alt="Representação da formação de cristais em petróleo"
+            width="1536" height="1024" loading="lazy" decoding="async"
+          />
+        </div>
+        <div class="split-copy" data-reveal>
+          <h2 class="display-3">A queda de temperatura favorece a formação de cristais de parafina.</h2>
+          <p class="body-text" style="color: rgba(16,17,13,0.68);">A redução da temperatura pode favorecer a cristalização de componentes parafínicos, alterando o comportamento do óleo ao longo do escoamento.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 — PARAFINA -->
+  <section class="feature-photo feature-photo--paraffin" data-reveal>
+    <img
+      src="assets/images/editorial/paraffin-crystals.jpg"
+      alt="Representação macro de cristais de parafina"
+      width="1536" height="1024" loading="lazy" decoding="async"
+    />
+    <div class="feature-photo-scrim"></div>
+    <div class="feature-photo-copy">
+      <h2 class="display-2">Pequenos cristais.<br />Grandes impactos no escoamento.</h2>
+    </div>
+  </section>
+
+  <!-- 06 — TRÊS PILARES -->
+  <section class="section section-bg-offwhite">
+    <div class="container">
+      <div class="pillars">
+        <div class="pillar" data-reveal>
+          <div class="pillar-media">
+            <img
+              src="assets/images/editorial/viscous-oil.jpg"
+              alt="Representação de petróleo com alta viscosidade"
+              width="1448" height="1086" loading="lazy" decoding="async"
+            />
+          </div>
+          <div class="pillar-copy">
+            <p class="big-number">01.</p>
+            <h3 class="display-3">Compreender o comportamento do óleo</h3>
+            <p class="body-text">Investigar como as condições analisadas influenciam a viscosidade e o comportamento do petróleo parafínico.</p>
           </div>
         </div>
-        <div class="toolbar-group">
-          <span class="toolbar-label">Escala:</span>
-          <div class="segmented" id="scale-toggle">
-            <button class="seg-btn active" data-scale="linear">Linear</button>
-            <button class="seg-btn" data-scale="log">Logarítmica</button>
+
+        <div class="pillar" data-reveal>
+          <div class="pillar-media">
+            <img
+              src="assets/images/editorial/oil-water-interface.jpg"
+              alt="Interface entre óleo e água"
+              width="1448" height="1086" loading="lazy" decoding="async"
+            />
+          </div>
+          <div class="pillar-copy">
+            <p class="big-number">02.</p>
+            <h3 class="display-3">Avaliar a influência da fase aquosa</h3>
+            <p class="body-text">Comparar o comportamento do Óleo A hidratado, contendo aproximadamente 30% de água, com o óleo desidratado.</p>
           </div>
         </div>
-        <div class="toolbar-group">
-          <button class="btn-ghost" id="select-all">Selecionar todas</button>
-          <button class="btn-ghost" id="select-none">Ocultar todas</button>
+
+        <div class="pillar" data-reveal>
+          <div class="pillar-media">
+            <img
+              src="assets/images/editorial/inhibitor-droplet.jpg"
+              alt="Adição de substância a uma amostra de petróleo"
+              width="1448" height="1086" loading="lazy" decoding="async"
+            />
+          </div>
+          <div class="pillar-copy">
+            <p class="big-number">03.</p>
+            <h3 class="display-3">Investigar alternativas para reduzir a deposição</h3>
+            <p class="body-text">Avaliar diferentes compostos utilizados como inibidores de parafina e comparar seu comportamento experimental.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 — METODOLOGIA -->
+  <section class="section section-bg-white" id="metodologia">
+    <div class="container">
+      <div class="method-intro">
+        <div data-reveal>
+          <p class="label">Metodologia</p>
+          <h2 class="display-2">Da preparação das amostras à análise dos resultados.</h2>
+        </div>
+        <div class="method-media" data-reveal>
+          <img
+            src="assets/images/editorial/laboratory-glassware.jpg"
+            alt="Vidraria de laboratório contendo amostra escura"
+            width="1122" height="1402" loading="lazy" decoding="async"
+          />
         </div>
       </div>
 
-      <div class="chart-layout">
-        <div class="chart-canvas-wrap">
-          <canvas id="main-chart" aria-label="Gráfico de viscosidade por temperatura"></canvas>
-          <div id="chart-tooltip" class="chart-tooltip" role="status"></div>
+      <div class="steps-grid" data-reveal>
+        <div class="step-card">
+          <p class="big-number">01</p>
+          <h4>Preparação das amostras</h4>
+          <p>Preparação do Óleo A nas condições hidratada e desidratada.</p>
         </div>
-        <aside class="legend" id="chart-legend" aria-label="Legenda e seleção de amostras"></aside>
+        <div class="step-card">
+          <p class="big-number">02</p>
+          <h4>Adição dos inibidores</h4>
+          <ul>
+            <li>Éster C14</li>
+            <li>Éster C12</li>
+            <li>Polímero R1</li>
+            <li>Polímero R2</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <p class="big-number">03</p>
+          <h4>Ensaios experimentais</h4>
+          <p>Medição da viscosidade em função da temperatura, utilizando rotor 4 a 6 RPM.</p>
+        </div>
+        <div class="step-card">
+          <p class="big-number">04</p>
+          <h4>Análise</h4>
+          <p>Comparação dos dados obtidos entre as diferentes condições experimentais.</p>
+        </div>
+      </div>
+
+      <div class="spec-strip" id="spec-strip" aria-label="Ficha técnica dos ensaios"></div>
+    </div>
+  </section>
+
+  <!-- 08 — INIBIDORES (AMOSTRAS) -->
+  <section class="section section-bg-offwhite">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="label">Amostras</p>
+        <h2 class="display-2">Quatro inibidores avaliados.</h2>
+      </div>
+      <div class="samples-grid" data-reveal>
+        <div class="sample-cell sample-cell--black">
+          <p class="big-number big-number--on-dark">01.</p>
+          <div><span class="sample-cell-tag">Éster</span><h4>Éster C14</h4></div>
+        </div>
+        <div class="sample-cell sample-cell--white">
+          <p class="big-number">02.</p>
+          <div><span class="sample-cell-tag">Éster</span><h4>Éster C12</h4></div>
+        </div>
+        <div class="sample-cell sample-cell--white">
+          <p class="big-number">03.</p>
+          <div><span class="sample-cell-tag">Polímero</span><h4>Polímero R1</h4></div>
+        </div>
+        <div class="sample-cell sample-cell--black">
+          <p class="big-number big-number--on-dark">04.</p>
+          <div><span class="sample-cell-tag">Polímero</span><h4>Polímero R2</h4></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 4. COMPARAÇÕES -->
-  <section id="comparacoes" class="section alt">
-    <div class="container">
-      <h2>Comparação entre condições experimentais</h2>
-      <p class="section-hint">Comparações calculadas apenas em temperaturas comuns entre a amostra de referência e a amostra com aditivo.</p>
-      <div id="comparacoes-content"></div>
-    </div>
-  </section>
+  <!-- 09 — TRANSIÇÃO VISUAL -->
+  <div class="wide-transition" data-reveal>
+    <img
+      src="assets/images/editorial/viscosity-flow-wide.jpg"
+      alt="Fluxo de petróleo viscoso"
+      width="1672" height="941" loading="lazy" decoding="async"
+    />
+  </div>
 
-  <!-- 5. DADOS EXPERIMENTAIS -->
-  <section id="dados" class="section">
+  <!-- 10 — RESULTADOS -->
+  <section class="section section-bg-white" id="resultados">
     <div class="container">
-      <h2>Dados experimentais</h2>
-      <p class="section-hint">Tabela completa com os dados originais da planilha. Nenhum valor foi alterado.</p>
-
-      <div class="table-toolbar">
-        <input type="search" id="table-search" placeholder="Buscar amostra, condição ou aditivo…" aria-label="Buscar na tabela" />
-        <select id="filter-amostra" aria-label="Filtrar por amostra">
-          <option value="">Todas as amostras</option>
-        </select>
-        <select id="filter-condicao" aria-label="Filtrar por condição">
-          <option value="">Todas as condições</option>
-          <option value="Desidratado">Desidratado</option>
-          <option value="Hidratado">Hidratado</option>
-        </select>
-        <button class="btn-primary" id="export-csv">Exportar CSV</button>
+      <div class="section-head" data-reveal>
+        <p class="label">Resultados</p>
+        <h2 class="display-2">O que os experimentos mostram?</h2>
       </div>
 
-      <div class="table-wrap">
-        <table id="data-table">
-          <thead>
-            <tr>
-              <th data-key="amostra">Amostra</th>
-              <th data-key="condicao">Condição</th>
-              <th data-key="aditivo">Aditivo / Inibidor</th>
-              <th data-key="temperatura">Temperatura (°C)</th>
-              <th data-key="viscosidade">Viscosidade (mP)</th>
-              <th data-key="rotor">Rotor</th>
-              <th data-key="rpm">RPM</th>
-            </tr>
-          </thead>
-          <tbody id="data-table-body"></tbody>
-        </table>
+      <div class="quickfacts" id="kpi-grid" aria-label="Indicadores gerais calculados a partir da planilha"></div>
+
+      <div class="chart-block" data-reveal>
+        <h3 class="display-3" style="margin-bottom:6px;">Viscosidade em função da temperatura</h3>
+        <p class="body-text" style="margin-bottom:28px;">Eixo X: Temperatura (°C). Eixo Y: Viscosidade (mP).</p>
+
+        <div class="chart-toolbar">
+          <div class="toolbar-group">
+            <span class="toolbar-label">Condição:</span>
+            <div class="segmented" id="condicao-filter">
+              <button class="seg-btn active" data-cond="todas">Todas</button>
+              <button class="seg-btn" data-cond="Desidratado">Desidratado</button>
+              <button class="seg-btn" data-cond="Hidratado">Hidratado</button>
+            </div>
+          </div>
+          <div class="toolbar-group">
+            <span class="toolbar-label">Escala:</span>
+            <div class="segmented" id="scale-toggle">
+              <button class="seg-btn active" data-scale="linear">Linear</button>
+              <button class="seg-btn" data-scale="log">Logarítmica</button>
+            </div>
+          </div>
+          <div class="toolbar-group">
+            <button class="btn-ghost" id="select-all">Selecionar todas</button>
+            <button class="btn-ghost" id="select-none">Ocultar todas</button>
+          </div>
+        </div>
+
+        <div class="chart-layout">
+          <div class="chart-canvas-wrap">
+            <canvas id="main-chart" aria-label="Gráfico de viscosidade por temperatura"></canvas>
+            <div id="chart-tooltip" class="chart-tooltip" role="status"></div>
+          </div>
+          <aside class="legend" id="chart-legend" aria-label="Legenda e seleção de amostras"></aside>
+        </div>
+
+        <div class="chart-caption">
+          <p><strong>Leitura:</strong> cada curva representa uma amostra do Óleo A, comparando a condição hidratada e desidratada, com e sem inibidores.</p>
+          <p class="chart-note">Rotor 4, 6 RPM.</p>
+        </div>
       </div>
-      <p class="table-meta" id="table-count"></p>
+
+      <div class="compare-block" data-reveal>
+        <h3 class="display-3" style="font-size:1.4rem;">Comparação entre condições experimentais</h3>
+        <p class="body-text" style="margin:10px 0 28px;">Comparações calculadas apenas em temperaturas comuns entre a amostra de referência e a amostra com aditivo.</p>
+        <div id="comparacoes-content"></div>
+      </div>
+
+      <details class="data-disclosure">
+        <summary>
+          <span>Tabela completa de dados experimentais<small>Todos os valores originais da planilha, sem alterações.</small></span>
+          <span class="sum-icon">+</span>
+        </summary>
+
+        <div class="table-toolbar">
+          <input type="search" id="table-search" placeholder="Buscar amostra, condição ou aditivo…" aria-label="Buscar na tabela" />
+          <select id="filter-amostra" aria-label="Filtrar por amostra">
+            <option value="">Todas as amostras</option>
+          </select>
+          <select id="filter-condicao" aria-label="Filtrar por condição">
+            <option value="">Todas as condições</option>
+            <option value="Desidratado">Desidratado</option>
+            <option value="Hidratado">Hidratado</option>
+          </select>
+          <button class="btn-primary" id="export-csv">Exportar CSV</button>
+        </div>
+
+        <div class="table-wrap">
+          <table id="data-table">
+            <thead>
+              <tr>
+                <th data-key="amostra">Amostra</th>
+                <th data-key="condicao">Condição</th>
+                <th data-key="aditivo">Aditivo / Inibidor</th>
+                <th data-key="temperatura">Temperatura (°C)</th>
+                <th data-key="viscosidade">Viscosidade (mP)</th>
+                <th data-key="rotor">Rotor</th>
+                <th data-key="rpm">RPM</th>
+              </tr>
+            </thead>
+            <tbody id="data-table-body"></tbody>
+          </table>
+        </div>
+        <p class="table-meta" id="table-count"></p>
+      </details>
     </div>
   </section>
 
-  <!-- 6. METODOLOGIA -->
-  <section id="metodologia" class="section alt">
+  <!-- 11 — RESULTADO EM DESTAQUE -->
+  <section class="section section-bg-black">
     <div class="container">
-      <h2>Condições experimentais</h2>
-      <div class="method-grid" id="method-grid"></div>
+      <div class="highlight-result" data-reveal>
+        <p class="label label--on-dark">Resultado em destaque</p>
+        <h2 class="display-1 on-dark">O Éster C12 apresentou efeito de inibição no óleo desidratado.</h2>
+      </div>
     </div>
   </section>
 
+  <!-- 12 — EQUIPE -->
+  <section class="section section-bg-offwhite" id="equipe">
+    <div class="container container--narrow">
+      <div class="section-head" data-reveal>
+        <p class="label">Equipe</p>
+        <h2 class="display-2">Equipe da pesquisa</h2>
+      </div>
+      <div class="team-list" data-reveal>
+        <div class="team-row">
+          <span class="team-row-name">Pedro Barbosa</span>
+          <span class="team-row-meta"><span class="team-row-role">Pesquisador</span>Engenharia de Controle e Automação · CEFET/RJ</span>
+        </div>
+        <div class="team-row">
+          <span class="team-row-name">Prof.ª Denise Gentili</span>
+          <span class="team-row-meta"><span class="team-row-role">Orientadora</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 — REFERÊNCIAS -->
+  <section class="section section-bg-white" id="referencias">
+    <div class="container container--narrow">
+      <div class="section-head" data-reveal>
+        <p class="label">Referências</p>
+        <h2 class="display-2">Base científica da pesquisa</h2>
+      </div>
+      <div class="reference-list" data-reveal>
+        <p class="reference-row">Pesquisa conduzida pela professora Denise Gentili.</p>
+      </div>
+    </div>
+  </section>
 
 </main>
 
+<!-- 14 — FOOTER -->
 <footer class="footer">
   <div class="container">
-    <p>Dashboard gerado a partir dos dados experimentais da planilha "Resultados Pedro I.C atualizado". Iniciação Científica — Engenharia de Controle e Automação.</p>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/images/editorial/lab-symbol.png" alt="" width="28" height="28" />
+        <div>
+          <div class="footer-brand-text">Viscosidade · Óleo Parafínico — CEFET/RJ</div>
+          <div class="footer-brand-loc">Rio de Janeiro — Brasil</div>
+        </div>
+      </div>
+      <nav class="footer-nav" aria-label="Navegação do rodapé">
+        <a href="#pesquisa">Pesquisa</a>
+        <a href="#metodologia">Metodologia</a>
+        <a href="#resultados">Resultados</a>
+        <a href="#equipe">Equipe</a>
+        <a href="#referencias">Referências</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>Projeto de Iniciação Científica — Engenharia de Controle e Automação.</p>
+      <p>Dados experimentais da planilha "Resultados Pedro I.C atualizado".</p>
+    </div>
   </div>
 </footer>
 

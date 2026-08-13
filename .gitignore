@@ -1,0 +1,19 @@
+.DS_Store
+
+# Imagens-fonte originais (não otimizadas) — o site usa as cópias
+# processadas em assets/images/editorial/. Mantidas localmente, fora do
+# controle de versão para não inflar o repositório.
+/imagem 1.png
+/imagem 2.png
+/imagem 3.png
+/imagem 4.png
+/imagem 5.png
+/imagem 6.png
+/imagem 7.png
+/imagem 8.png
+/imagem hero.png
+/imagen 3.png
+/card 1.png
+/card 2.png
+/card 3.png
+/bdf0ef7f-d8dd-49a2-a3c4-7154f7cdfd15.png

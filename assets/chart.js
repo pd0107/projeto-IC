@@ -203,7 +203,7 @@ class LineChart {
     // grid + axis
     ctx.strokeStyle = this.opts.gridColor;
     ctx.fillStyle = this.opts.textColor;
-    ctx.font = "11px -apple-system, 'Segoe UI', sans-serif";
+    ctx.font = "11px Inter, -apple-system, 'Segoe UI', sans-serif";
     ctx.lineWidth = 1;
 
     const yTicks =
@@ -249,7 +249,7 @@ class LineChart {
 
     // axis labels
     ctx.fillStyle = this.opts.textColor;
-    ctx.font = "600 12px -apple-system, 'Segoe UI', sans-serif";
+    ctx.font = "500 12px Inter, -apple-system, 'Segoe UI', sans-serif";
     ctx.textAlign = "center";
     ctx.fillText(this.opts.xLabel, left + plotW / 2, this.height - 14);
     ctx.save();
@@ -308,7 +308,7 @@ class LineChart {
     if (!vis.length) {
       ctx.fillStyle = this.opts.textColor;
       ctx.textAlign = "center";
-      ctx.font = "13px -apple-system, sans-serif";
+      ctx.font = "13px Inter, -apple-system, sans-serif";
       ctx.fillText("Nenhuma amostra selecionada", left + plotW / 2, top + plotH / 2);
     }
   }

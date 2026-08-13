@@ -23,7 +23,7 @@ const SAMPLES = [
     aditivo: "Sem inibidor",
     tipoAditivo: "referência",
     referenciaDe: null,
-    color: "#c9622d",
+    color: "#10110D",
     lineStyle: "solid",
     dados: [
       { temperatura: 49, viscosidade: 644 },
@@ -44,7 +44,7 @@ const SAMPLES = [
     aditivo: "Éster C14",
     tipoAditivo: "inibidor",
     referenciaDe: "D-REF",
-    color: "#2a9d8f",
+    color: "#5B6472",
     lineStyle: "dashed",
     dados: [
       { temperatura: 45, viscosidade: 1169 },
@@ -64,7 +64,7 @@ const SAMPLES = [
     aditivo: "Éster C12",
     tipoAditivo: "inibidor",
     referenciaDe: "D-REF",
-    color: "#457b9d",
+    color: "#3E63A6",
     lineStyle: "dashed",
     dados: [
       { temperatura: 50, viscosidade: 690 },
@@ -84,7 +84,7 @@ const SAMPLES = [
     aditivo: "Polímero R1",
     tipoAditivo: "inibidor",
     referenciaDe: "D-REF",
-    color: "#8d5a97",
+    color: "#97A0AC",
     lineStyle: "dotted",
     dados: [
       { temperatura: 45, viscosidade: 1215 },
@@ -103,7 +103,7 @@ const SAMPLES = [
     aditivo: "Polímero R2",
     tipoAditivo: "inibidor",
     referenciaDe: "D-REF",
-    color: "#5b8c5a",
+    color: "#2B3440",
     lineStyle: "dotted",
     dados: [
       { temperatura: 45, viscosidade: 908 },
@@ -122,7 +122,7 @@ const SAMPLES = [
     aditivo: "Sem inibidor",
     tipoAditivo: "referência",
     referenciaDe: null,
-    color: "#264653",
+    color: "#1C2B4A",
     lineStyle: "solid",
     dados: [
       { temperatura: 50, viscosidade: 3653 },
@@ -141,7 +141,7 @@ const SAMPLES = [
     aditivo: "Éster C14",
     tipoAditivo: "inibidor",
     referenciaDe: "H-REF",
-    color: "#e9973f",
+    color: "#6F8CC4",
     lineStyle: "dashed",
     dados: [
       { temperatura: 45, viscosidade: 4067 },
@@ -161,7 +161,7 @@ const SAMPLES = [
     aditivo: "Polímero R1",
     tipoAditivo: "inibidor",
     referenciaDe: "H-REF",
-    color: "#6a4c93",
+    color: "#7C93C9",
     lineStyle: "dotted",
     dados: [
       { temperatura: 45, viscosidade: 16589 },

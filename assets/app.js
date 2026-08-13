@@ -44,18 +44,15 @@ function renderKPIs() {
   const cards = [
     { label: "Amostras analisadas", value: fmt(k.totalAmostras), unit: "" },
     { label: "Medições registradas", value: fmt(k.totalMedicoes), unit: "" },
-    { label: "Temperatura mínima registrada", value: fmt(k.tempMin), unit: "°C" },
-    { label: "Temperatura máxima registrada", value: fmt(k.tempMax), unit: "°C" },
-    { label: "Viscosidade mínima registrada", value: fmt(k.viscMin), unit: "mP" },
-    { label: "Viscosidade máxima registrada", value: fmt(k.viscMax), unit: "mP" },
-    { label: "Aditivos/inibidores identificados", value: fmt(k.totalInibidores), unit: "" },
+    { label: "Faixa de temperatura", value: `${fmt(k.tempMin)}–${fmt(k.tempMax)}`, unit: "°C" },
+    { label: "Inibidores avaliados", value: fmt(k.totalInibidores), unit: "" },
   ];
   document.getElementById("kpi-grid").innerHTML = cards
     .map(
       (c) => `
-    <div class="kpi-card">
-      <div><span class="kpi-value">${c.value}</span><span class="kpi-unit">${c.unit}</span></div>
-      <div class="kpi-label">${c.label}</div>
+    <div>
+      <div><span class="quickfact-value">${c.value}</span><span class="quickfact-unit">${c.unit}</span></div>
+      <div class="quickfact-label">${c.label}</div>
     </div>`
     )
     .join("");
@@ -109,6 +106,9 @@ function initChart() {
     yLabel: "Viscosidade (mP)",
     yScale: "linear",
     tooltipEl: document.getElementById("chart-tooltip"),
+    gridColor: "rgba(16,17,13,0.10)",
+    textColor: "rgba(16,17,13,0.62)",
+    axisColor: "rgba(16,17,13,0.32)",
   });
   updateChart();
 
@@ -345,27 +345,26 @@ function exportCSV() {
   URL.revokeObjectURL(url);
 }
 
-/* ============ 6. METODOLOGIA ============ */
+/* ============ 7. METODOLOGIA — ficha técnica ============ */
 function renderMethodology() {
   const temps = FLAT.map((r) => r.temperatura);
-  const inibidores = [...new Set(SAMPLES.filter((s) => s.tipoAditivo === "inibidor").map((s) => s.aditivo))];
   const items = [
-    { label: "Tipo de óleo", value: META.oleo },
-    { label: "Condições avaliadas", value: "Desidratado e hidratado (amostras independentes)" },
-    { label: "Inibidores / aditivos utilizados", value: inibidores.join(", ") },
+    { label: "Óleo", value: META.oleo },
     { label: "Rotor", value: META.rotor },
     { label: "Rotação", value: `${META.rpm} RPM` },
-    { label: "Faixa de temperatura", value: `${fmt(Math.min(...temps))} °C a ${fmt(Math.max(...temps))} °C` },
+    { label: "Faixa de temperatura", value: `${fmt(Math.min(...temps))}–${fmt(Math.max(...temps))} °C` },
     { label: "Unidade de viscosidade", value: META.unidadeViscosidade },
     { label: "Número de medições", value: fmt(FLAT.length) },
   ];
-  document.getElementById("method-grid").innerHTML = items
+  const el = document.getElementById("spec-strip");
+  if (!el) return;
+  el.innerHTML = items
     .map((it) => {
       const missing = it.value === null || it.value === undefined || it.value === "";
       return `
-      <div class="method-card">
-        <div class="method-label">${it.label}</div>
-        <div class="method-value ${missing ? "unavailable" : ""}">${missing ? "Informação não fornecida na planilha." : it.value}</div>
+      <div class="spec-item">
+        <div class="spec-item-label">${it.label}</div>
+        <div class="spec-item-value ${missing ? "unavailable" : ""}">${missing ? "Informação não fornecida na planilha." : it.value}</div>
       </div>`;
     })
     .join("");
@@ -382,7 +381,7 @@ function initChrome() {
 }
 
 function initScrollSpy() {
-  const navLinks = Array.from(document.querySelectorAll(".main-nav a"));
+  const navLinks = Array.from(document.querySelectorAll("#main-nav a"));
   const sections = navLinks
     .map((a) => document.querySelector(a.getAttribute("href")))
     .filter(Boolean);
@@ -403,6 +402,28 @@ function initScrollSpy() {
   sections.forEach((s) => observer.observe(s));
 }
 
+/* ============ Reveal on scroll (discreto, respeita prefers-reduced-motion) ============ */
+function initReveal() {
+  const items = Array.from(document.querySelectorAll("[data-reveal]"));
+  if (!items.length) return;
+  if (!("IntersectionObserver" in window)) {
+    items.forEach((el) => el.classList.add("is-visible"));
+    return;
+  }
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+  );
+  items.forEach((el) => observer.observe(el));
+}
+
 /* ============ Boot ============ */
 document.addEventListener("DOMContentLoaded", () => {
   renderKPIs();
@@ -412,4 +433,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initTable();
   renderMethodology();
   initChrome();
+  initReveal();
 });
