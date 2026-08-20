@@ -2,7 +2,7 @@
 
 Site interativo desenvolvido para apresentar os resultados de uma pesquisa de Iniciação Científica sobre o comportamento de petróleos parafínicos: como a presença de água e diferentes inibidores químicos alteram a viscosidade e a deposição de parafina durante a produção e o transporte de óleo.
 
-**🔗 Acesse o site:** https://pd0107.github.io/projeto-IC/
+**🔗 Acesse o site:** https://projeto-gbdiiajoh-pd-s-projects2.vercel.app
 
 ## Sobre a pesquisa
 
