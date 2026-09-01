@@ -69,8 +69,8 @@ function currentVisibleSeries() {
 }
 
 const CONDITION_LABEL = {
-  Desidratado: "Desidratado (emulsionado)",
-  Hidratado: "Hidratado (não emulsionado)",
+  Desidratado: "Desidratado (não emulsionado)",
+  Hidratado: "Hidratado (emulsionado)",
 };
 
 function renderLegend() {

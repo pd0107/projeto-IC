@@ -13,7 +13,7 @@ class LineChart {
         xLabel: "",
         yLabel: "",
         yScale: "linear", // 'linear' | 'log'
-        padding: { top: 24, right: 24, bottom: 52, left: 78 },
+        padding: { top: 24, right: 24, bottom: 60, left: 116 },
         gridColor: "rgba(120,130,140,0.18)",
         textColor: "#4a5568",
         axisColor: "rgba(120,130,140,0.4)",
@@ -203,7 +203,7 @@ class LineChart {
     // grid + axis
     ctx.strokeStyle = this.opts.gridColor;
     ctx.fillStyle = this.opts.textColor;
-    ctx.font = "11px Inter, -apple-system, 'Segoe UI', sans-serif";
+    ctx.font = "500 13px 'JetBrains Mono', ui-monospace, 'SF Mono', Consolas, monospace";
     ctx.lineWidth = 1;
 
     const yTicks =
@@ -223,7 +223,7 @@ class LineChart {
       ctx.textAlign = "right";
       ctx.textBaseline = "middle";
       const label = t >= 1000 ? Math.round(t).toLocaleString("pt-BR") : t.toLocaleString("pt-BR");
-      ctx.fillText(label, left - 10, y);
+      ctx.fillText(label, left - 18, y);
     });
 
     const xTicks = this._niceLinearTicks(domain.xMin, domain.xMax, 8);
@@ -249,11 +249,11 @@ class LineChart {
 
     // axis labels
     ctx.fillStyle = this.opts.textColor;
-    ctx.font = "500 12px Inter, -apple-system, 'Segoe UI', sans-serif";
+    ctx.font = "600 13px Inter, -apple-system, 'Segoe UI', sans-serif";
     ctx.textAlign = "center";
-    ctx.fillText(this.opts.xLabel, left + plotW / 2, this.height - 14);
+    ctx.fillText(this.opts.xLabel, left + plotW / 2, this.height - 16);
     ctx.save();
-    ctx.translate(16, top + plotH / 2);
+    ctx.translate(20, top + plotH / 2);
     ctx.rotate(-Math.PI / 2);
     ctx.fillText(this.opts.yLabel, 0, 0);
     ctx.restore();
