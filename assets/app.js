@@ -68,12 +68,17 @@ function currentVisibleSeries() {
   return SAMPLES.map((s) => ({ ...s, visible: visibility[s.id] && (condFilter === "todas" || s.condicao === condFilter) }));
 }
 
+const CONDITION_LABEL = {
+  Desidratado: "Desidratado (emulsionado)",
+  Hidratado: "Hidratado (não emulsionado)",
+};
+
 function renderLegend() {
   const groups = { Desidratado: [], Hidratado: [] };
   SAMPLES.forEach((s) => groups[s.condicao].push(s));
   let html = "";
   Object.entries(groups).forEach(([cond, list]) => {
-    html += `<div class="legend-group-label">${cond}</div>`;
+    html += `<div class="legend-group-label">${CONDITION_LABEL[cond] || cond}</div>`;
     list.forEach((s) => {
       const on = visibility[s.id];
       html += `
